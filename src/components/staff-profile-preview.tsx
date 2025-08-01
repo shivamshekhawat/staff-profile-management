@@ -29,7 +29,7 @@ import {
   Award,
   Briefcase,
 } from "lucide-react";
-import type { StaffProfile } from "@/app/page";
+import type { StaffProfile } from "../App";
 
 interface StaffProfilePreviewProps {
   profile: StaffProfile;

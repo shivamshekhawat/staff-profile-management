@@ -1,9 +1,6 @@
-"use client"
-
-import { useState } from "react"
-import { StaffProfileForm } from "@/components/staff-profile-form"
-import { StaffProfilePreview } from "@/components/staff-profile-preview"
-import { Button } from "@/components/ui/button"
+import React, { useState } from "react"
+import { StaffProfileForm } from "./components/staff-profile-form"
+import { StaffProfilePreview } from "./components/staff-profile-preview"
 import { ArrowLeft, Sparkles } from "lucide-react"
 
 export interface StaffProfile {
@@ -50,9 +47,10 @@ export interface StaffProfile {
   facebook: string
   linkedin: string
   skype: string
+  profileImage?: string
 }
 
-export default function Home() {
+function App() {
   const [currentView, setCurrentView] = useState<"form" | "preview">("form")
   const [staffProfile, setStaffProfile] = useState<StaffProfile | null>(null)
 
@@ -83,9 +81,19 @@ export default function Home() {
         {currentView === "form" ? (
           <div className="space-y-6">
             <div className="text-center space-y-4">
-              
-              
-             
+              <div className="flex items-center justify-center gap-3 mb-8">
+                <div className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-2xl">
+                  <Sparkles className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+                    Staff Profile Management
+                  </h1>
+                  <p className="text-lg text-gray-600 mt-1">
+                    Create and manage comprehensive staff profiles
+                  </p>
+                </div>
+              </div>
             </div>
             <StaffProfileForm onSave={handleSave} initialData={staffProfile} onClose={handleClose} />
           </div>
@@ -93,14 +101,13 @@ export default function Home() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
+                <button
                   onClick={handleEdit}
-                  className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border-white/20 hover:bg-white/90 shadow-lg transition-all duration-300"
+                  className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-white/20 hover:bg-white/90 shadow-lg transition-all duration-300 rounded-md px-4 py-2"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Back to Edit
-                </Button>
+                </button>
                 <div>
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
                     Staff Profile Preview
@@ -116,3 +123,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default App 
